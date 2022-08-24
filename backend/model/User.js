@@ -5,19 +5,26 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
   name: {
     type: String,
-    required: true
+    required: true,
   },
   email: {
     type: String,
     required: true,
-    unique: true
+    unique: true,
   },
   password: {
     type: String,
     required: true,
-    minlength: 6    
-  }
+    minlength: 6,
+  },
+  blogs: [
+    {
+      type: mongoose.Types.ObjectId,
+      ref: "Blog",
+      required: true,
+    },
+  ],
 });
 
-export default mongoose.model("User",userSchema);
+export default mongoose.model("User", userSchema);
 //naming convention it will store as users
