@@ -4,10 +4,11 @@ import {
   getAllBlogs,
   updateBlog,
 } from "../controllers/blog-controllers";
-const blogRrouter = express.Router();
+const blogRouter = express.Router();
 
-blogRrouter.get("/", getAllBlogs);
-blogRrouter.post("/add", addBlog);
-blogRrouter.put("/update/:id", updateBlog);
+blogRouter.get("/", getAllBlogs);
+blogRouter.post("/add", addBlog);
+blogRouter.put("/update/:id", updateBlog);
 
-export default blogRrouter;
+
+export default blogRouter;

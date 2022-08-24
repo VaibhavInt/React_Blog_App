@@ -1,13 +1,13 @@
 import express from "express";
 import mongoose from "mongoose";
 import router from "./routes/user-routes";
-import blogRrouter from "./routes/blog-routes";
+import blogRouter from "./routes/blog-routes";
 
 const app = express();
 app.use(express.json());
 
 app.use("/api/user", router);
-app.use("/api/blog", blogRrouter);
+app.use("/api/blog", blogRouter);
 
 mongoose
   .connect(
