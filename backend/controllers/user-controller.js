@@ -48,11 +48,12 @@ export const signup = async (req, res, next) => {
 
 export const login = async (req, res, next) => {
   const { email, password } = req.body;
-
+  console.log("er", req.body);
   let existingUser;
 
   try {
     existingUser = await User.findOne({ email });
+    console.log("existingUser", existingUser);
   } catch (err) {
     return console.log(err);
   }
@@ -63,6 +64,7 @@ export const login = async (req, res, next) => {
   }
 
   const isPasswordCorrect = bcrypt.compareSync(password, existingUser.password);
+
   if (!isPasswordCorrect) {
     return res.status(400).json({ message: "Incorrect Password" });
   }

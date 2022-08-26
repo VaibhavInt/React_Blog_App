@@ -17,12 +17,6 @@ const Auth = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("va", inputs);
-    sendRequest();
-  };
-
   const sendRequest = async () => {
     const res = await axios
       .post("http://localhost:5000/api/user/login", {
@@ -33,6 +27,12 @@ const Auth = () => {
 
     const data = await res.data;
     return data;
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("va", inputs);
+    sendRequest();
   };
 
   return (
