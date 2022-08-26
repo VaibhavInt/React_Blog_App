@@ -8,18 +8,20 @@ const Auth = () => {
     email: "",
     password: "",
   });
+
   const [isSignup, setIsSignup] = useState(false);
 
   const handleChange = (e) => {
     setInputs((prevState) => ({
       ...prevState,
-      [e.target.name]: [e.target.value],
+      [e.target.name]: e.target.value,
     }));
   };
 
-  const sendRequest = async () => {
+  const sendRequest = async (type = "login") => {
     const res = await axios
-      .post("http://localhost:5000/api/user/login", {
+      .post(`http://localhost:5000/api/user/${type}`, {
+        name: inputs.name,
         email: inputs.email,
         password: inputs.password,
       })
@@ -32,7 +34,12 @@ const Auth = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("va", inputs);
-    sendRequest();
+    console.log("dd", typeof inputs.email);
+    if (isSignup) {
+      sendRequest("signup").then((data) => console.log(data));
+    } else {
+      sendRequest().then((data) => console.log(data));
+    }
   };
 
   return (
