@@ -1,8 +1,13 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
 import React, { useState } from "react";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { authActions } from "../store";
+import { useNavigate } from "react-router-dom";
 
 const Auth = () => {
+  const navigate = useNavigate();
+  const dispath = useDispatch();
   const [inputs, setInputs] = useState({
     name: "",
     email: "",
@@ -36,9 +41,15 @@ const Auth = () => {
     console.log("va", inputs);
     console.log("dd", typeof inputs.email);
     if (isSignup) {
-      sendRequest("signup").then((data) => console.log(data));
+      sendRequest("signup")
+        .then(() => dispath(authActions.login()))
+        .then(() => navigate("/blogs"))
+        .then((data) => console.log(data));
     } else {
-      sendRequest().then((data) => console.log(data));
+      sendRequest()
+        .then(() => dispath(authActions.login()))
+        .then(() => navigate("/blogs"))
+        .then((data) => console.log(data));
     }
   };
 
