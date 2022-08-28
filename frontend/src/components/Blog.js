@@ -1,14 +1,19 @@
 import React from "react";
 import {
   Avatar,
+  Box,
   Card,
   CardContent,
   CardHeader,
   CardMedia,
+  IconButton,
   Typography,
 } from "@mui/material";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 
-const Blog = ({ title, description, imageURL, userName }) => {
+const Blog = ({ title, description, imageURL, userName, isUser }) => {
+  console.log(title, isUser);
   return (
     <div>
       {" "}
@@ -24,10 +29,20 @@ const Blog = ({ title, description, imageURL, userName }) => {
           },
         }}
       >
+        {isUser && (
+          <Box display="flex">
+            <IconButton sx={{ marginLeft: "auto" }}>
+              <EditIcon />
+            </IconButton>
+            <IconButton>
+              <DeleteForeverIcon />
+            </IconButton>
+          </Box>
+        )}
         <CardHeader
           avatar={
-            <Avatar sx={{ bgcolor: "red" }} aria-label="recipe">
-              {title}
+            <Avatar sx={{ bgcolor: "red" }}>
+              {userName ? userName.charAt(0) : ""}
             </Avatar>
           }
           title={title}
@@ -41,7 +56,7 @@ const Blog = ({ title, description, imageURL, userName }) => {
         />
         <CardContent>
           <Typography variant="body2" color="text.secondary">
-            {description}
+            <b>{userName}</b> {": "} {description}
           </Typography>
         </CardContent>
       </Card>
