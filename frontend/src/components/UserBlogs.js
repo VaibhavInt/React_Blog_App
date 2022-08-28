@@ -17,7 +17,6 @@ const UserBlogs = () => {
   useEffect(() => {
     sendRequest().then((data) => setUser(data.user));
   });
-  console.log("blog", user);
 
   return (
     <div>
@@ -25,6 +24,7 @@ const UserBlogs = () => {
         user.blogs &&
         user.blogs.map((blog, index) => (
           <Blog
+            id={id}
             key={index}
             isUser={true}
             title={blog.title}

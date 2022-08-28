@@ -49,6 +49,7 @@ const AddBlog = () => {
           display="flex"
           flexDirection={"column"}
           width={"80%"}
+          backgroundColor="white"
         >
           <Typography
             fontWeight={"bold"}
