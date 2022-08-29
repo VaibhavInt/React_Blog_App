@@ -12,13 +12,26 @@ import {
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Blog = ({ title, description, imageURL, userName, isUser, id }) => {
   const navigate = useNavigate();
   const handleEdit = (e) => {
-    navigate(`/myblogs/${id}`);
+    navigate(`/myBlogs/${id}`);
   };
-  const handleDelete = (e) => {};
+
+  const deleteRequest = async () => {
+    const res = await axios
+      .delete(`http://localhost:5000/api/blog/${id}`)
+      .catch((err) => console.log(err));
+    const data = res.data;
+    return data;
+  };
+  const handleDelete = (e) => {
+    deleteRequest()
+      .then(() => navigate("/"))
+      .then(() => navigate("/blogs"));
+  };
   return (
     <div>
       {" "}
@@ -38,10 +51,10 @@ const Blog = ({ title, description, imageURL, userName, isUser, id }) => {
         {isUser && (
           <Box display="flex">
             <IconButton onClick={handleEdit} sx={{ marginLeft: "auto" }}>
-              <EditIcon />
+              <EditIcon color="warning" />
             </IconButton>
             <IconButton onClick={handleDelete}>
-              <DeleteForeverIcon />
+              <DeleteForeverIcon color="error" />
             </IconButton>
           </Box>
         )}
@@ -61,6 +74,8 @@ const Blog = ({ title, description, imageURL, userName, isUser, id }) => {
           alt="Paella dish"
         />
         <CardContent>
+          <hr />
+          <br />
           <Typography variant="body2" color="text.secondary">
             <b>{userName}</b> {": "} {description}
           </Typography>

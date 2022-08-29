@@ -61,6 +61,7 @@ const Auth = () => {
       <form onSubmit={handleSubmit}>
         <Box
           maxWidth={400}
+          backgroundColor="white"
           display="flex"
           flexDirection="column"
           alignItems="center"
